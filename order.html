@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <title>C R E A M Y C O F F E E | Homepage</title>
+
+    <!--CSS-->
+     
+    <link href="node_modules/startbootstrap-full-slider/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="node_modules/startbootstrap-full-slider/css/full-slider.css" rel="stylesheet">
+
+  </head>
+  <body>
+      <!--Navbar will be placed here-->
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <div class="container">
+            <a class="navbar-brand" href="index.html">C R E A M Y</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+              aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item ">
+                  <a class="nav-link" href="/index.html">Home</a>
+                </li>
+                <li class="nav-item active">
+                  <a class="nav-link" href="/order.html">Order Coffee <span class="sr-only">(current)</span></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+      </nav>
+
+      <!--Form Will be placed here-->
+      <h1 style="text-align: center; margin-top: 50px;">Place your Order.</h1>
+
+        <div class="container form">
+            <form class="orderForm">
+                <div class="base">
+                    <p>Pick a size</p>
+                    <label style="margin: 20px;"><input type="checkbox" value="1">Small</label>
+                    <p id="small"></p>
+                    <label style="margin: 20px;"><input type="checkbox" value="2">Tall</label>
+                    <p id="tall"></p>
+                    <label style="margin: 20px;"><input type="checkbox" value="3">Grande</label>
+                    <p id="grande"></p>
+                  </div>
+                <div class="style" style="align-items: center;">
+                        <p>Pick a size</p>
+                        <label style="margin: 20px;"><input type="checkbox" value="1">Americano</label>
+                        <label style="margin: 20px;"><input type="checkbox" value="2">Cappucino</label>
+                        <label style="margin: 20px;"><input type="checkbox" value="3">Latte</label>
+                </div>
+                <div class="ingrediants">
+                    <p>Any Extras?</p>
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Expresso Shot
+                    <span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">1 shot</a></li>
+                        <li><a href="#">2 shots</a></li>
+                        <li><a href="#">3 shots</a></li>
+                        <li><a href="#">4 shots</a></li>
+                    </ul>
+                    <label style="margin: 20px;"><input type="checkbox" value="">Milk</label>
+                    <label style="margin: 20px;"><input type="checkbox" value="">Cream</label>
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Sugar
+                    <span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">1 spoon</a></li>
+                        <li><a href="#">2 spoons</a></li>
+                    </ul>
+                    <label style="margin: 20px;"><input type="checkbox" value="">Cream</label>
+
+
+                </div>    
+
+            </form>
+        </div>
+      <!--Footer will be placed here(still needs to be designed)-->
+  </body>
+
+   
+  <!--Bootstrap Script-->
+  <!--Bootstrap JavaScript-->
+  <script src="node_modules/startbootstrap-full-slider/vendor/jquery/jquery.min.js"></script>
+  <script src="node_modules/startbootstrap-full-slider/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/js/order.js"></script>
+
+
+ 
+</html>
