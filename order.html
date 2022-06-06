@@ -36,26 +36,24 @@
 
       <!--Form Will be placed here-->
       <h1 style="text-align: center; margin-top: 50px;">Place your Order.</h1>
+      <h2 id="orderResult"></h2>
 
         <div class="container form">
             <form class="orderForm">
                 <div class="base">
-                    <p>Pick a size</p>
-                    <label style="margin: 20px;"><input type="checkbox" value="1">Small</label>
-                    <p id="small"></p>
-                    <label style="margin: 20px;"><input type="checkbox" value="2">Tall</label>
-                    <p id="tall"></p>
-                    <label style="margin: 20px;"><input type="checkbox" value="3">Grande</label>
-                    <p id="grande"></p>
+                    <h5>Pick a size</h5>
+                    <label style="margin: 20px;" ><input type="radio" id="small" name="size">Small</label>
+                    <label style="margin: 20px;"><input type="radio" id="tall" name="size">Tall</label>
+                    <label style="margin: 20px;"><input type="radio" id="grande" name="size">Grande</label>
                   </div>
                 <div class="style" style="align-items: center;">
-                        <p>Pick a size</p>
-                        <label style="margin: 20px;"><input type="checkbox" value="1">Americano</label>
-                        <label style="margin: 20px;"><input type="checkbox" value="2">Cappucino</label>
-                        <label style="margin: 20px;"><input type="checkbox" value="3">Latte</label>
+                        <h5>What style of coffee would you like?</h5>
+                        <label style="margin: 20px;"><input type="radio" id="americano" name="style">Americano</label>
+                        <label style="margin: 20px;"><input type="radio" id="cappucino" name="style">Cappucino</label>
+                        <label style="margin: 20px;"><input type="radio" id="latte" name="style">Latte</label>
                 </div>
-                <div class="ingrediants">
-                    <p>Any Extras?</p>
+                <!-- <div class="ingrediants">
+                    <h5>Any Extras?</h5>
                     <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Expresso Shot
                     <span class="caret"></span></button>
                     <ul class="dropdown-menu">
@@ -75,8 +73,8 @@
                     <label style="margin: 20px;"><input type="checkbox" value="">Cream</label>
 
 
-                </div>    
-
+                </div> -->
+                <input type="button" value="Place order" onclick="purchase()"/>
             </form>
         </div>
       <!--Footer will be placed here(still needs to be designed)-->
@@ -87,7 +85,7 @@
   <!--Bootstrap JavaScript-->
   <script src="node_modules/startbootstrap-full-slider/vendor/jquery/jquery.min.js"></script>
   <script src="node_modules/startbootstrap-full-slider/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="/js/order.js"></script>
+  <script src="js/order.js"></script>
 
 
  
