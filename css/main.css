@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #f8f9fa; /* A light background color */
+}
+
+/* Navigation Bar Styling */
+.navbar {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.navbar-brand {
+    font-weight: bold;
+    letter-spacing: 1px; /* CRE A M Y has spaces, this can complement it */
+}
+
+/* Order Page (order.html) Specific Styling */
+/* Center the main heading on the order page */
+h1 { /* This will apply to all h1s, if order.html's h1 needs specific styling, a more specific selector might be needed */
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+/* Style for the order result and dynamic price messages */
+#orderResult, #dynamicPriceDisplay {
+    text-align: center;
+    font-size: 1.25rem;
+    margin-top: 15px;
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#orderResult {
+    color: #155724; /* Green for success */
+    background-color: #d4edda; /* Light green background */
+    border: 1px solid #c3e6cb;
+}
+
+/* Clearer styling for an empty orderResult before an order */
+#orderResult:empty {
+    display: none; /* Hide if empty, or use a default message style */
+}
+
+#dynamicPriceDisplay {
+    font-weight: bold;
+    color: #007bff; /* Blue for price */
+}
+
+/* Container for the form for better centering/spacing */
+/* Adapted from .form-container to target existing .container.form */
+.container.form { 
+    max-width: 600px;
+    margin: 0 auto; /* This will center the block element */
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+
+.orderForm .base, .orderForm .style {
+    margin-bottom: 25px;
+    padding: 15px;
+    border: 1px solid #eee;
+    border-radius: 5px;
+}
+
+.orderForm h5 {
+    margin-bottom: 15px;
+    color: #555;
+}
+
+.orderForm label {
+    margin-right: 15px; /* Adjust spacing between radio labels */
+    font-size: 1rem;
+}
+
+.orderForm input[type="button"] {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    font-size: 1.1rem;
+    background-color: #28a745; /* Green button */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.orderForm input[type="button"]:hover {
+    background-color: #218838; /* Darker green on hover */
+}
+
+/* Footer Styling (Consistent across pages) */
+footer.py-5.bg-dark { /* Targeting the existing classes */
+    margin-top: 40px;
+    background-color: #2c3e50 !important; /* A different dark shade */
+}
+
+footer .text-white {
+    font-style: italic;
+}
