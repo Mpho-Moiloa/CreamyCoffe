@@ -1,91 +1,102 @@
-
-class Ingrediants {
-    constructor() {
-        this.expressoShot = 0.75;
-        this.milk = 0.5;
-        this.cream = 1;
-        this.sugar = 0.2;
-        this.syrup = 5;//for now this is golden syrup only!
-    }
-    
+const SIZES = {
+    small: { name: "a small", price: 12, shots: 1 },
+    tall: { name: "a tall", price: 14, shots: 2 },
+    grande: { name: "a grande", price: 16, shots: 3 }
 };
-var chosenOrder = new Ingrediants;
 
-class Size extends Ingrediants{
-    constructor(){
-        super();
-        this.small = 12;
-        this.tall = 14;
-        this.grande = 16;
-        this.messageSmall = "a small";
-        this.messageTall = "a tall";
-        this.messageGrande = "a grande";
-    };
-    calculateSmall() {
-        var shot = this.expressoShot;
-        var price = shot + this.small;
-        return price;
-        
-    };
-    calculateTall() {
-        var shot = this.expressoShot * 2;
-        return shot + this.tall
-        
-    };
-    calculateGrande() {
-        var shot = this.expressoShot * 3;
-        return shot + this.grande
-        
-    };
+const STYLES = {
+    americano: { name: "Americano", price: 0 },
+    cappuccino: { name: "Cappuccino", price: 1 }, // Assuming this is extra for cream
+    latte: { name: "Latte", price: 0.5 } // Assuming this is extra for milk
 };
-var chosenSize = new Size;
-// console.log(size.small);
 
-class Style extends Ingrediants{
-    constructor(){
-        super();
-        this.americano = 0; //nothing
-        this.cappuccino = this.cream; //cream
-        this.latte = this.milk; //milk
-        this.messageAmericano = "Americano";
-        this.messageCappucino = "Cappuccino";
-        this.messageLatte = "Latte";
-    }
+const BASE_INGREDIENTS = {
+    espressoShotPrice: 0.75,
+    // milk: 0.5, // Covered by latte style price
+    // cream: 1, // Covered by cappuccino style price
+    sugar: 0.2, // Will need UI elements if we want to use this
+    syrup: 5 // Will need UI elements if we want to use this
 };
-var chosenStyle = new Style;
+
 //Purchase button functionality
-var purchase = function() {
-    var small = document.querySelector('#small');
-    var tall = document.querySelector('#tall');
-    var grande = document.querySelector('#grande');
-    var americano = document.querySelector('#americano');
-    var cappuccino = document.querySelector('#cappucino');
-    var latte = document.querySelector('#latte');
-    
-    if (small.checked && americano.checked){
-        document.getElementById("orderResult").innerHTML = `You have ordered ${chosenSize.messageSmall +" "+ chosenStyle.messageAmericano}; price is R${chosenSize.calculateSmall()}`;
-    } else if(tall.checked && americano.checked) {
-        document.getElementById("orderResult").innerHTML = `You have ordered ${chosenSize.messageTall +" "+ chosenStyle.messageAmericano}; price is R${chosenSize.calculateTall()}`;
-    } else if (grande.checked && americano.checked) {
-        document.getElementById("orderResult").innerHTML = `You have ordered ${chosenSize.messageGrande +" "+ chosenStyle.messageAmericano}; price is R${chosenSize.calculateGrande()}`;
-    } else if (small.checked && cappuccino.checked) {
-        document.getElementById("orderResult").innerHTML = `You have ordered ${chosenSize.messageSmall +" "+ chosenStyle.messageCappucino}; price is R${chosenSize.calculateSmall() + chosenStyle.cappuccino}`;
-    } else if(tall.checked && cappuccino.checked) {
-        document.getElementById("orderResult").innerHTML = `You have ordered ${chosenSize.messageTall +" "+ chosenStyle.messageCappucino}; price is R${chosenSize.calculateTall() + chosenStyle.cappuccino}`;
-    } else if (grande.checked && cappuccino.checked) {
-        document.getElementById("orderResult").innerHTML = `You have ordered ${chosenSize.messageGrande +" "+ chosenStyle.messageCappucino}; price is R${chosenSize.calculateGrande() + chosenStyle.cappuccino}`;
-    } else if (small.checked && latte.checked) {
-        document.getElementById("orderResult").innerHTML = `You have ordered ${chosenSize.messageSmall +" "+ chosenStyle.messageLatte}; price is R${chosenSize.calculateSmall() + chosenStyle.latte}`;
-    } else if(tall.checked && latte.checked) {
-        document.getElementById("orderResult").innerHTML = `You have ordered ${chosenSize.messageTall +" "+ chosenStyle.messageLatte}; price is R${chosenSize.calculateTall() + chosenStyle.latte}`;
-    } else if (grande.checked && latte.checked) {
-        document.getElementById("orderResult").innerHTML = `You have ordered ${chosenSize.messageGrande +" "+ chosenStyle.messageLatte}; price is R${chosenSize.calculateGrande() + chosenStyle.latte}`;
-    } else {
-        document.getElementById("orderResult").innerHTML = "Order incomplete, please choose the correct options";
+function purchase() {
+    const selectedSizeValue = document.querySelector('input[name="size"]:checked');
+    const selectedStyleValue = document.querySelector('input[name="style"]:checked');
+    const orderResultEl = document.getElementById("orderResult");
+
+    if (!selectedSizeValue && !selectedStyleValue) {
+        orderResultEl.innerHTML = "Please select a size and a style for your coffee.";
+        return;
     }
-    
+    if (!selectedSizeValue) {
+        orderResultEl.innerHTML = "Please select a size for your coffee.";
+        return;
+    }
+    if (!selectedStyleValue) {
+        orderResultEl.innerHTML = "Please select a style for your coffee.";
+        return;
+    }
+
+    const sizeKey = selectedSizeValue.id; // e.g., "small"
+    const styleKey = selectedStyleValue.id; // e.g., "americano"
+
+    const sizeInfo = SIZES[sizeKey];
+    const styleInfo = STYLES[styleKey];
+
+    if (!sizeInfo || !styleInfo) {
+        orderResultEl.innerHTML = "There was an error processing your order. Please try again.";
+        // console.error("Invalid size or style key selected.");
+        return;
+    }
+
+    const calculatedPrice = (sizeInfo.shots * BASE_INGREDIENTS.espressoShotPrice) + sizeInfo.price + styleInfo.price;
+
+    orderResultEl.innerHTML = `You have ordered ${sizeInfo.name} ${styleInfo.name}; price is R${calculatedPrice.toFixed(2)}`;
 }
 
+function updateDynamicPrice() {
+    const selectedSizeValue = document.querySelector('input[name="size"]:checked');
+    const selectedStyleValue = document.querySelector('input[name="style"]:checked');
+    const priceDisplayEl = document.getElementById("dynamicPriceDisplay");
 
+    if (selectedSizeValue && selectedStyleValue) {
+        const sizeKey = selectedSizeValue.id;
+        const styleKey = selectedStyleValue.id;
 
-// console.log();
+        const sizeInfo = SIZES[sizeKey];
+        const styleInfo = STYLES[styleKey];
+
+        // It's good practice to check if keys were valid, though radio buttons should ensure this.
+        if (sizeInfo && styleInfo) {
+            const calculatedPrice = (sizeInfo.shots * BASE_INGREDIENTS.espressoShotPrice) + sizeInfo.price + styleInfo.price;
+            priceDisplayEl.innerHTML = `R${calculatedPrice.toFixed(2)}`;
+        } else {
+            priceDisplayEl.innerHTML = "- error calculating -"; // Should not happen with radio buttons
+        }
+    } else {
+        priceDisplayEl.innerHTML = "- select size and style -";
+    }
+}
+
+// Add event listeners
+const radioButtons = document.querySelectorAll('input[name="size"], input[name="style"]');
+radioButtons.forEach(radio => {
+    radio.addEventListener('change', updateDynamicPrice);
+});
+
+// Initial call to set the price display when the page loads
+// Calling directly might be too early if script is in <head> and not deferred.
+// DOMContentLoaded ensures the DOM is ready.
+document.addEventListener('DOMContentLoaded', updateDynamicPrice);
+
+function calculateOrderPrice(sizeKey, styleKey) {
+    const sizeInfo = SIZES[sizeKey];
+    const styleInfo = STYLES[styleKey];
+
+    if (!sizeInfo || !styleInfo) {
+        // console.error(`Invalid size or style key provided: sizeKey=${sizeKey}, styleKey=${styleKey}`);
+        return NaN; // Or throw an error: throw new Error("Invalid size or style key");
+    }
+
+    return (sizeInfo.shots * BASE_INGREDIENTS.espressoShotPrice) + sizeInfo.price + styleInfo.price;
+}

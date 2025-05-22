@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order.js Tests</title>
+    <!-- Important: Adjust path if js/order.js is located elsewhere relative to tests/ -->
+    <script src="../js/order.js"></script>
+</head>
+<body>
+    <h1>Testing order.js Price Calculation</h1>
+    <p>Open the browser console to see test results.</p>
+
+    <script>
+        let testsPassed = 0;
+        let testsFailed = 0;
+
+        function assertEquals(actual, expected, message) {
+            if (actual === expected) {
+                console.log(`PASS: ${message}`);
+                testsPassed++;
+            } else {
+                console.error(`FAIL: ${message} | Expected: ${expected}, Actual: ${actual}`);
+                testsFailed++;
+            }
+        }
+
+        // --- Test Cases ---
+        function testSmallAmericano() {
+            const expectedPrice = (SIZES.small.shots * BASE_INGREDIENTS.espressoShotPrice) + SIZES.small.price + STYLES.americano.price;
+            const actualPrice = calculateOrderPrice('small', 'americano');
+            assertEquals(actualPrice, expectedPrice, 'Small Americano price calculation');
+        }
+
+        function testTallCappuccino() {
+            const expectedPrice = (SIZES.tall.shots * BASE_INGREDIENTS.espressoShotPrice) + SIZES.tall.price + STYLES.cappuccino.price;
+            const actualPrice = calculateOrderPrice('tall', 'cappuccino');
+            assertEquals(actualPrice, expectedPrice, 'Tall Cappuccino price calculation');
+        }
+
+        function testGrandeLatte() {
+            const expectedPrice = (SIZES.grande.shots * BASE_INGREDIENTS.espressoShotPrice) + SIZES.grande.price + STYLES.latte.price;
+            const actualPrice = calculateOrderPrice('grande', 'latte');
+            assertEquals(actualPrice, expectedPrice, 'Grande Latte price calculation');
+        }
+        
+        function testInvalidSize() {
+            const actualPrice = calculateOrderPrice('invalidSize', 'americano');
+            // Check if it returns NaN or handle error as defined in calculateOrderPrice
+            if (isNaN(actualPrice)) {
+                 console.log('PASS: Invalid size correctly results in NaN');
+                 testsPassed++;
+            } else {
+                 console.error('FAIL: Invalid size did not result in NaN | Actual: ' + actualPrice);
+                 testsFailed++;
+            }
+        }
+
+        function testInvalidStyle() {
+            const actualPrice = calculateOrderPrice('small', 'invalidStyle');
+            if (isNaN(actualPrice)) {
+                 console.log('PASS: Invalid style correctly results in NaN');
+                 testsPassed++;
+            } else {
+                 console.error('FAIL: Invalid style did not result in NaN | Actual: ' + actualPrice);
+                 testsFailed++;
+            }
+        }
+
+        // --- Run Tests ---
+        function runTests() {
+            console.log("--- Starting Price Calculation Tests ---");
+            
+            testSmallAmericano();
+            testTallCappuccino();
+            testGrandeLatte();
+            testInvalidSize();
+            testInvalidStyle();
+
+            console.log("--- Test Summary ---");
+            console.log(`Total Tests: ${testsPassed + testsFailed}`);
+            console.log(`Passed: ${testsPassed}`);
+            console.log(`Failed: ${testsFailed}`);
+            if (testsFailed === 0) {
+                console.log("All tests passed!");
+            } else {
+                console.error(`${testsFailed} test(s) failed.`);
+            }
+        }
+
+        // Run tests when the DOM is loaded (ensures order.js is loaded and parsed)
+        document.addEventListener('DOMContentLoaded', runTests);
+    </script>
+</body>
+</html>
